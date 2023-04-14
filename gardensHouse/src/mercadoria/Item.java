@@ -20,6 +20,7 @@ public class Item{
 	private String nome;
 	private double preco;
 	private int qtd, id;
+	private LocalDate dataDaCompra;
 	
 	
 	// Construtor padrão
@@ -27,6 +28,7 @@ public class Item{
 		this.nome = nome;
 		this.preco = preco;
 		this.qtd = qtd;
+
 	}
 	
 	// Construtor para uso de métodos
@@ -250,4 +252,13 @@ public class Item{
 	public void setId(int id) {
 		this.id = id;
 	}
+
+	public void setDataDaCompra(LocalDate dataDaCompra) {
+		this.dataDaCompra = dataDaCompra;
+	}
+	
+	public LocalDate getDataDaCompra() {
+		return dataDaCompra;
+	}
+
 }

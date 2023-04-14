@@ -1,6 +1,7 @@
 package mercadoria;
 
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,8 +10,9 @@ public class Vendas {
 	
 	
 	private String cpfCliente, idFuncionario;
-	private int idVenda;
-	private Item carrinho;
+	private String idVenda;
+	private List<Item> carrinho;
+	private LocalDate dataDaCompra;
 	
 	/*
 	 * 	estive pensando sobre o quão útil é ter o nome, preço e quantidade no vendas.
@@ -27,11 +29,11 @@ public class Vendas {
 	 * 	
 	 */
 	
-	public Vendas(int idVenda, String cpf, String id, List<Item> carrinho) {
-		this.idVenda = idVenda;
+	public Vendas(String cpf, String id, LocalDate dataDaCompra, List<Item> carrinho) {
 		this.cpfCliente = cpf;
 		this.idFuncionario = id;
-		this.carrinho = (Item) carrinho;
+		this.dataDaCompra = dataDaCompra;
+		this.carrinho = carrinho;
 	}
 	
 	
@@ -48,9 +50,16 @@ public class Vendas {
 		 * 	Item i = new Item();
 		 * 	i.mostrar(carrinho);
 		 */
-		
+		LocalDate hoje = LocalDate.now();
+		int aux = 0;
 		for (Vendas v : historicoVendas) {
-	        	//System.out.println("Cpf cliente: " + v.getCpfCliente() + " - Id Funcionário: "+ v.getIdFuncionario() + " - Valor compra:  " + v.getPreco()*v.getQtd());
+			aux ++;
+			String idDeVenda = String.format("%02d%02d%d%d", hoje.getDayOfMonth(), hoje.getMonthValue(), hoje.getYear(), aux);
+	        System.out.println(idDeVenda + " - " + v.getCpfCliente() + " - " + v.getIdFuncionario() + " - " + v.getDataDaCompra());
+	        
+	        Item i = new Item();
+	        i.mostrar(carrinho);				
+			//System.out.println("Cpf cliente: " + v.getCpfCliente() + " - Id Funcionário: "+ v.getIdFuncionario() + " - Valor compra:  " + v.getPreco()*v.getQtd());
         }		
 	}
 	
@@ -64,15 +73,23 @@ public class Vendas {
 		return idFuncionario;
 	}
 
-	public int getidVenda() {
+	public String getidVenda() {
 		return idVenda;
 	}
 
-	public void setIdVenda(int idVenda) {
+	public void setIdVenda(String idVenda) {
 		this.idVenda = idVenda;
 	}
 
-	public Item getCarrinho() {
+	public List<Item> getCarrinho() {
 		return carrinho;
+	}
+
+	public LocalDate getDataDaCompra() {
+		return dataDaCompra;
+	}
+
+	public void setDataDaCompra(LocalDate dataDaCompra) {
+		this.dataDaCompra = dataDaCompra;
 	}
 }
