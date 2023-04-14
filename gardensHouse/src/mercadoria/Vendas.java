@@ -12,14 +12,27 @@ public class Vendas {
 	private int qtd;
 	private Item carrinho;
 	
-	
-	public Vendas(String nome, double preco, int qtd, String cpf, String id, Item carrinho) {
+	/*
+	 * 	estive pensando sobre o quão útil é ter o nome, preço e quantidade no vendas.
+	 * 
+	 * 	acho que podemos trocar isso por um LocalDate dataDaCompra que já funcionaria.
+	 * 	LocalDate dataDaCompra = new LocalDate(ANO, MÊS, DIA) <- todos eles em INT
+	 * 
+	 * 	ai pensei no mostrar vendas ser assim:
+	 * 
+	 * 	cpfCliente(ou nome do cliente) - idFuncionário(ou nome funcionário) - dataDaCompra
+	 * 	-----------------------------------------------------------------------------------
+	 * 	Item i = new Item();
+	 * 	i.mostrar(carrinho);
+	 * 	
+	 */
+	public Vendas(String nome, double preco, int qtd, String cpf, String id, List<Item> carrinho) {
 		this.nome = nome;
 		this.preco = preco;
 		this.qtd = qtd;
 		this.cpfCliente = cpf;
 		this.idFuncionario = id;
-		this.carrinho = carrinho;
+		this.carrinho = (Item) carrinho;
 	}
 	
 	
