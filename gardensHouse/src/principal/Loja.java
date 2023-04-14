@@ -28,9 +28,11 @@ public class Loja {
 		
 		
 		menuCliente mc = new menuCliente();
-		mc.menuLoja(estoqueDaLoja, colaboradores, carrinhoDeCompras, clientela, historicoDeVendas, armazem, empregado, kart, fregues, vazao);
+		mc.menuLoja(estoqueDaLoja, colaboradores, carrinhoDeCompras, clientela, 
+					historicoDeVendas, armazem, empregado, kart, fregues, vazao);
 		
 		
 	}
+	
 
 }
