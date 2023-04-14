@@ -4,6 +4,7 @@ package mercadoria;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 
 public class Vendas {
@@ -50,15 +51,15 @@ public class Vendas {
 		 * 	Item i = new Item();
 		 * 	i.mostrar(carrinho);
 		 */
-		LocalDate hoje = LocalDate.now();
+		Scanner input = new Scanner(System.in);
 		int aux = 0;
 		for (Vendas v : historicoVendas) {
 			aux ++;
-			String idDeVenda = String.format("%02d%02d%d%d", hoje.getDayOfMonth(), hoje.getMonthValue(), hoje.getYear(), aux);
+			String idDeVenda = String.format( v.dataDaCompra.toString() + aux);
 	        System.out.println(idDeVenda + " - " + v.getCpfCliente() + " - " + v.getIdFuncionario() + " - " + v.getDataDaCompra());
 	        
 	        Item i = new Item();
-	        i.mostrar(carrinho);				
+	        i.mostrar(carrinho, input);				
 			//System.out.println("Cpf cliente: " + v.getCpfCliente() + " - Id Funcionário: "+ v.getIdFuncionario() + " - Valor compra:  " + v.getPreco()*v.getQtd());
         }		
 	}

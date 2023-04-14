@@ -19,13 +19,12 @@ public class menuCliente {
 	
 	public void menuLoja(List<Produto> estoque, List<Funcionario> colaboradores, List<Item> carrinho, 
 			List<Cliente> clientela, List<Vendas> historicoDeVendas, Produto armazem, Funcionario empregado,
-			Item kart, Cliente fregues, Vendas vazao) {
+			Item kart, Cliente fregues, Vendas vazao, Scanner input) {
 		
 		armazem.criar(estoque);
 		fregues.criar(clientela);
 		empregado.criar(colaboradores);
 		
-		Scanner input = new Scanner(System.in);
 		
 		/* 
 		 * um método do tipo Cliente verificando se o cliente que vai efetuar a compra está no nosso cadastro, 
@@ -34,7 +33,7 @@ public class menuCliente {
 		 */
 		
 		int op = 0;
-        while (op != 5) {
+        while (op != 6) {
         	System.out.print("|##-- Bem vindo a Garden's House --##|\n");
 			System.out.print("|------------------------------------|\n");
 			System.out.print("| Selecione uma operação:            |\n");
@@ -42,7 +41,8 @@ public class menuCliente {
 			System.out.print("| Opção 2 - Remover do Carrinho      |\n");
 			System.out.print("| Opção 3 - Mostrar o Carrinho       |\n");
 			System.out.print("| Opção 4 - Finalizar o Carrinho     |\n");
-			System.out.print("| Opção 5 - Sair                     |\n");
+			System.out.print("| Opção 5 - Histórico de Vendas      |\n");
+			System.out.print("| Opção 6 - Sair                     |\n");
 			System.out.print("|------------------------------------|\n");
 
 			System.out.print("Opção: ");
@@ -50,22 +50,26 @@ public class menuCliente {
 
             switch (op) {
                 case 1:
-                	kart.adicionar(estoque, carrinho);
+                	kart.adicionar(estoque, carrinho, input);
                 	break;
                 	
                 case 2:
-                	kart.remover(carrinho);
+                	kart.remover(carrinho, input);
                 	break;
                     
                 case 3:
-                	kart.mostrar(carrinho);
+                	kart.mostrar(carrinho, input);
                 	break;
                 	
                 case 4:
-                	kart.finalizar(colaboradores, carrinho, clientela, historicoDeVendas, fregues);
+                	kart.finalizar(colaboradores, carrinho, clientela, historicoDeVendas, fregues, input);
                 	break;
                 
                 case 5:
+                	vazao.mostrar(historicoDeVendas);
+                	break;	
+                
+                case 6:
                     System.out.println("Saindo...");
                     break;
                     
@@ -74,7 +78,6 @@ public class menuCliente {
                     break;
             }
         }
-        input.close();
 	}
 	
 }	

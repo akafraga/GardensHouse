@@ -2,6 +2,7 @@ package principal;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 import menu.menuCliente;
 import individuo.Cliente;
@@ -25,11 +26,12 @@ public class Loja {
 		Item kart = new Item();
 		Cliente fregues = new Cliente();
 		Vendas vazao = new Vendas();
-		
-		
+		Scanner input = new Scanner(System.in);
+
+
 		menuCliente mc = new menuCliente();
 		mc.menuLoja(estoqueDaLoja, colaboradores, carrinhoDeCompras, clientela, 
-					historicoDeVendas, armazem, empregado, kart, fregues, vazao);
+					historicoDeVendas, armazem, empregado, kart, fregues, vazao, input);
 		
 		
 	}
