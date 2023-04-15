@@ -1,8 +1,7 @@
 package menu;
 
 
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 import individuo.Cliente;
 import individuo.Funcionario;
@@ -47,18 +46,18 @@ public class menuCliente {
 
 			System.out.print("Opção: ");
             op = input.nextInt();
-
+            
             switch (op) {
                 case 1:
-                	kart.adicionar(estoque, carrinho, input);
+                	kart.adicionar(estoque, carrinho, historicoDeVendas, input);
                 	break;
                 	
                 case 2:
-                	kart.remover(carrinho, input);
+                	kart.remover(carrinho, historicoDeVendas, input);
                 	break;
                     
                 case 3:
-                	kart.mostrar(carrinho, input);
+                	kart.mostrar(carrinho, historicoDeVendas, input);
                 	break;
                 	
                 case 4:
@@ -66,7 +65,7 @@ public class menuCliente {
                 	break;
                 
                 case 5:
-                	vazao.mostrar(historicoDeVendas);
+                	vazao.mostrar(historicoDeVendas, kart, input);
                 	break;	
                 
                 case 6:
@@ -77,6 +76,7 @@ public class menuCliente {
                     System.out.println("Opção inválida.");
                     break;
             }
+            System.out.print("\n");
         }
 	}
 	

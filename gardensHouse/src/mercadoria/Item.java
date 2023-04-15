@@ -37,22 +37,30 @@ public class Item{
 	}
 	
 	// Mostra o carrinho de compras
-	public void mostrar(List<Item> carrinho, Scanner input) {
-		// if(carrinho.isEmpty() == false) {
+	public void mostrar(List<Item> carrinho, List<Vendas> historicoDeVendas, Scanner input) {
+		if(carrinho.isEmpty() == false || historicoDeVendas.isEmpty() == false) {
 			int cont = 0;
+			double total = 0;
+			
 			for (Item c : carrinho) {
 				cont++;
 	        	c.setId(cont);
 	        }
+			
 			for (Item c : carrinho) {
 	        	System.out.println(c.getId() + " - "+ c.getNome() + " - qtd: " + c.getQtd() + " --- Preço: " + c.getPreco()*c.getQtd()); 
+	        	total = total + c.getPreco()*c.getQtd();
 	        }
-		} 
-	//System.out.println("Item vazio.");
-	//}
+			
+			System.out.println("--------------------------------------");
+			System.out.println("Total:                          " + total);
+		} else {
+		System.out.println("Carrinho vazio.");
+		}
+	}
 
 	// Adiciona um item ao carrinho de compras
-	public void adicionar(List<Produto> estoque, List<Item> carrinho, Scanner input) {
+	public void adicionar(List<Produto> estoque, List<Item> carrinho, List<Vendas> historicoDeVendas, Scanner input) {
 	   	System.out.print("\nDigite o código: ");
 		int id = input.nextInt();
 		System.out.print("Digite a quantidade: ");
@@ -76,27 +84,31 @@ public class Item{
 				System.out.println("Item adicionado ao carrinho!");
 			}
 		}		
-		System.out.println("\n\n");
 	}
 
 	// Remove um item do carrinho de compras
-	public void remover(List<Item> carrinho, Scanner input) {
+	public void remover(List<Item> carrinho, List<Vendas> historicoDeVendas, Scanner input) {
 		if(carrinho.isEmpty() == false) {
 			int cont = 0;
 			int id = 0;
 			int qtd = 0;
+			
 			for (Item c : carrinho) {
 				cont++;
 				c.setId(cont); // settando o id de cada um dos produtos de forma manual, 100% atualizada igual bomba patch
 			}	
-			while(id > cont || id < cont) { // enquanto id for maior ou menor que o contador que é 
-				mostrar(carrinho, input); // a quantidade de itens no carrinho, vai rodar
+
+			
+			while(id == 0) { // enquanto id for maior ou menor que o contador que é 
+				mostrar(carrinho, historicoDeVendas, input); // a quantidade de itens no carrinho, vai rodar
 				System.out.print("\nDigite o id: ");
 				id = input.nextInt();
-				if(id > cont || id < cont) { // um aviso caso o id digitado não seja de nenhum item do carrinho
-					System.out.println("\nNão existe esse id. Tente novamente."); // <- o aviso
+				if(id > cont || id < 1 || id == 0) { // um aviso caso o id digitado não seja de nenhum item do carrinho
+					System.out.println("Não existe esse id. Tente novamente."); // <- o aviso
+					id = 0;
 				}
 			}	
+			
 			System.out.print("Digite o quantidade: ");
 			qtd = input.nextInt();
 			for(Item c : carrinho) { // foreachzin padrão
@@ -112,11 +124,8 @@ public class Item{
 				}
 			}	
 		} else {
-			System.out.println("Item vazio.");
+			System.out.println("Carrinho vazio.");
 		}
-		
-		System.out.println("\n\n");
-		
 	}
 
 	// Exclui o carrinho de compras ao finalizar
@@ -128,81 +137,31 @@ public class Item{
 	public void finalizar(List<Funcionario> colaboradores, List<Item> carrinho,  List<Cliente> clientela, List<Vendas> historicoDeVendas, Cliente fregues, Scanner input ) {
 		
 		if(carrinho.isEmpty() == false) {
-			mostrar(carrinho, input);
+			mostrar(carrinho, historicoDeVendas, input);
 			int aux = 0; // pra executar o while enquanto não for respondida a pergunta
 			while(aux == 0) {
 				System.out.print("Deseja finalizar o carrinho? [S/N] ");
-				char op1 = input.next().charAt(0);
+				char op = input.next().charAt(0);
 				
-				if(op1 == 'N' || op1 == 'n' || op1 == 'S' || op1 == 's') {  // VOLTAR AO MENU ou FINALIZAR O CARRINHO
+				if(op == 'N' || op == 'n' || op == 'S' || op == 's') {  // VOLTAR AO MENU ou FINALIZAR O CARRINHO
 					
 					
-					if(op1 == 'S' || op1 == 's') {  // DE FATO FINALIZAR O CARRINHO 
+					if(op == 'S' || op == 's') {  // DE FATO FINALIZAR O CARRINHO 
 						System.out.print("Digit o ID do funcionário: ");
 						String idFuncionario = input.next();
-						System.out.print("Digite o cpf do cliente:");
+						System.out.print("Digite o cpf do cliente: ");
 						String cpf = input.next();
 						
-						boolean taNoClientela = false;
-						for(Cliente c1 : clientela) {
-							if(cpf == c1.getCpf()) {
-								taNoClientela = true;
-							}
-						}
-						if(taNoClientela == false) {
-							System.out.print("Digite o nome completo: ");
-							String nome = input.next();
-							
-							System.out.print("Digite o email: ");
-							String email = input.next();
-							
-							System.out.print("Digite o cep: ");
-							String cep = input.next();
-							
-							System.out.print("Digite o telefone: ");
-							String telefone = input.next();
-							
-							System.out.print("Digite o dia: ");
-							int dia = input.nextInt();
-							
-							System.out.print("Digite o mês: ");
-							int mes = input.nextInt();
-							
-							System.out.print("Digite o ano: ");
-							int ano = input.nextInt();
-							
-							clientela.add(new Cliente(nome, cpf, email, cep, telefone, LocalDate.of(ano, mes, dia)));
-						}
-
 						
-						
-
-						
-						
-						double total = 0;
-						for (Item c : carrinho) {
-							total = total + (c.getPreco() * c.getQtd());
-						}
-						double desconto = 0;
-						
-						if(total >= 2100) { // se valor gasto na loja for maior que 2100, cliente recebe 10% de desconto
-							desconto = 0.05;
-						}
-						
-						
-						
-						//if(.testeAniversario() == true) {
-							//desconto = desconto + 0.05;
-						//}
-						
-						total = total - total * desconto;
-						System.out.println("Total a ser pago: " + total);
+						fregues.testeCadastro(clientela, input, cpf);
 						
 						
 						historicoDeVendas.add(new Vendas(cpf, idFuncionario, LocalDate.now(), carrinho));
+						
+						
 						excluir(carrinho);
 					}
-					if(op1 == 'N' || op1 == 'n') {
+					if(op == 'N' || op == 'n') {
 						System.out.println("Voltando ao menu...");
 					}
 					aux = 1;
@@ -211,9 +170,8 @@ public class Item{
 				}
 			}
 		} else {
-			System.out.println("Item vazio.");
+			System.out.println("Carrinho vazio.");
 		}
-		System.out.println("\n\n");
 	}
 	
 	

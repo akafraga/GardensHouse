@@ -44,24 +44,27 @@ public class Vendas {
 	
 	
 	
-	public void mostrar(List<Vendas> historicoVendas) {
-		/*
-		 * 	idVenda - Cliente - Funcionário - dataDaCompra
-		 * 	-----------------------------------------------------------------------------------
-		 * 	Item i = new Item();
-		 * 	i.mostrar(carrinho);
-		 */
-		Scanner input = new Scanner(System.in);
+	public void mostrar(List<Vendas> historicoDeVendas, Item kart, Scanner input) {
+		
 		int aux = 0;
-		for (Vendas v : historicoVendas) {
-			aux ++;
-			String idDeVenda = String.format( v.dataDaCompra.toString() + aux);
-	        System.out.println(idDeVenda + " - " + v.getCpfCliente() + " - " + v.getIdFuncionario() + " - " + v.getDataDaCompra());
-	        
-	        Item i = new Item();
-	        i.mostrar(carrinho, input);				
-			//System.out.println("Cpf cliente: " + v.getCpfCliente() + " - Id Funcionário: "+ v.getIdFuncionario() + " - Valor compra:  " + v.getPreco()*v.getQtd());
-        }		
+		
+		if(historicoDeVendas.isEmpty() == false) {
+			double total = 0;
+			for (Vendas v : historicoDeVendas) {
+				aux ++;
+				String idDeVenda = String.format( v.dataDaCompra.toString() + aux);
+		        System.out.println(idDeVenda + " - " + v.getCpfCliente() + " - " + v.getIdFuncionario() + " - " + v.getDataDaCompra());
+		        
+				for (Item c : v.getCarrinho()) {
+		        	c.mostrar(v.getCarrinho(), historicoDeVendas, input);
+		        }
+
+				System.out.println("--------------------------------------");
+				System.out.println("Total:                          " + total);
+			}
+		} else {
+			System.out.println("Não foram efetuadas vendas ainda.");
+		}		
 	}
 	
 	//Get 

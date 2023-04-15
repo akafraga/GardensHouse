@@ -28,9 +28,8 @@ public class Pagamento {
 	
 	
 	
-	public void realizarPagamento(int scanOp) {
+	public void realizarPagamento(int scanOp, Scanner input) {
 		
-		Scanner input = new Scanner(System.in);
 		Random random = new Random();
 
 
@@ -46,9 +45,7 @@ public class Pagamento {
 			System.out.println("Digite o código de segurança: \n");
 			String codigoCartaoCredito = input.next();
 			
-			
-		
-		break;
+			break;
 		
 		// 2 = cartao debito
 		case 2:
@@ -79,10 +76,10 @@ public class Pagamento {
 			double valorCliente = input.nextDouble();
 			double troco = valorCliente - valorCompra;
 			System.out.println("Você deve dar R$" + troco + " de troco ao cliente.");
+			break;
 			
 			
-			
-	}
+		}
 	
 	
 	}
