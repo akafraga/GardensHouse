@@ -1,9 +1,0 @@
-/**
- * 
- */
-/**
- * @author dtic
- *
- */
-module gardensHouse {
-}
