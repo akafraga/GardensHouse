@@ -31,12 +31,6 @@ public class Cliente extends Pessoa{
 	}
 	
 	
-	// Testa se no dia da compra é aniversário do cliente
-	public boolean testeAniversario() {
-			
-		// TRUE = é aniversário - FALSE = não é aniversário
-	}
-	
 	// Get e Set
 	public LocalDate getDataDeNascimento() {
 		return dataDeNascimento;

@@ -61,7 +61,7 @@ public class Produto {
 	
 	// Cria o estoque
 	public void criar(List<Produto> estoque) {
-		estoque.add(new Produto("Guitarra", "Stratocaster vermelha", 1200));
+		estoque.add(new Produto("Guitarra", "Stratocaster vermelha", 1100));
 		estoque.add(new Produto("Bateria", "Bateria com 4 pratos e 2 pedais",  3500));
 		estoque.add(new Produto("Teclado", "Clássico elétrico preto",  1500));
 		estoque.add(new Produto("Piano", "De calda preto", 1200));
