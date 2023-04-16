@@ -1,12 +1,12 @@
 package mercadoria;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 // Importando bibliotecas que usaremos
 import java.util.List;
 import java.util.Scanner;
 
 import individuo.Cliente;
-import individuo.Funcionario;
 
 /*
  * Essa classe é a classe Produto mas mais
@@ -37,8 +37,8 @@ public class Item{
 	}
 	
 	// Mostra o carrinho de compras
-	public void mostrar(List<Item> carrinho, List<Vendas> historicoDeVendas, Scanner input) {
-		if(carrinho.isEmpty() == false || historicoDeVendas.isEmpty() == false) {
+	public void mostrar(List<Item> carrinho, Scanner input) {
+		if(carrinho.isEmpty() == false) {
 			int cont = 0;
 			double total = 0;
 			
@@ -60,7 +60,7 @@ public class Item{
 	}
 
 	// Adiciona um item ao carrinho de compras
-	public void adicionar(List<Produto> estoque, List<Item> carrinho, List<Vendas> historicoDeVendas, Scanner input) {
+	public void adicionar(List<Produto> estoque, List<Item> carrinho, Scanner input) {
 	   	System.out.print("\nDigite o código: ");
 		int id = input.nextInt();
 		System.out.print("Digite a quantidade: ");
@@ -87,7 +87,7 @@ public class Item{
 	}
 
 	// Remove um item do carrinho de compras
-	public void remover(List<Item> carrinho, List<Vendas> historicoDeVendas, Scanner input) {
+	public void remover(List<Item> carrinho, Scanner input) {
 		if(carrinho.isEmpty() == false) {
 			int cont = 0;
 			int id = 0;
@@ -100,7 +100,7 @@ public class Item{
 
 			
 			while(id == 0) { // enquanto id for maior ou menor que o contador que é 
-				mostrar(carrinho, historicoDeVendas, input); // a quantidade de itens no carrinho, vai rodar
+				mostrar(carrinho, input); // a quantidade de itens no carrinho, vai rodar
 				System.out.print("\nDigite o id: ");
 				id = input.nextInt();
 				if(id > cont || id < 1 || id == 0) { // um aviso caso o id digitado não seja de nenhum item do carrinho
@@ -134,10 +134,9 @@ public class Item{
 	}
 
 	// Finaliza o carrinho de compras
-	public void finalizar(List<Funcionario> colaboradores, List<Item> carrinho,  List<Cliente> clientela, List<Vendas> historicoDeVendas, Cliente fregues, Scanner input ) {
-		
+	public void finalizar(List<Item> carrinho, List<Cliente> clientela, Cliente fregues, Historico loja, Scanner input ) {
 		if(carrinho.isEmpty() == false) {
-			mostrar(carrinho, historicoDeVendas, input);
+			mostrar(carrinho, input);
 			int aux = 0; // pra executar o while enquanto não for respondida a pergunta
 			while(aux == 0) {
 				System.out.print("Deseja finalizar o carrinho? [S/N] ");
@@ -147,16 +146,23 @@ public class Item{
 					
 					
 					if(op == 'S' || op == 's') {  // DE FATO FINALIZAR O CARRINHO 
-						System.out.print("Digit o ID do funcionário: ");
+						System.out.print("Digite o ID do funcionário: ");
 						String idFuncionario = input.next();
 						System.out.print("Digite o cpf do cliente: ");
 						String cpf = input.next();
 						
-						
 						fregues.testeCadastro(clientela, input, cpf);
 						
+						List<Item> carrinhoClone = new ArrayList<Item>();
 						
-						historicoDeVendas.add(new Vendas(cpf, idFuncionario, LocalDate.now(), carrinho));
+						for(Item cc : carrinho) { // clonando o carrinho atual, para podermos zerar no final do processo de finalizar
+							carrinhoClone.add(cc);
+						}
+						
+						
+						
+						loja.realizarVendas(new Transacao(cpf, idFuncionario, LocalDate.now(), carrinhoClone));
+						
 						
 						
 						excluir(carrinho);
