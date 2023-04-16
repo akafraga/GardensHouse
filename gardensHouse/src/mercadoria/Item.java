@@ -61,8 +61,12 @@ public class Item{
 
 	// Adiciona um item ao carrinho de compras
 	public void adicionar(List<Produto> estoque, List<Item> carrinho, Scanner input) {
+		Produto p = new Produto();
+		p.mostrar(estoque);
+		
 	   	System.out.print("\nDigite o código: ");
 		int id = input.nextInt();
+		
 		System.out.print("Digite a quantidade: ");
 		int qtd = input.nextInt();
 		for (Produto e : estoque) {
@@ -89,15 +93,8 @@ public class Item{
 	// Remove um item do carrinho de compras
 	public void remover(List<Item> carrinho, Scanner input) {
 		if(carrinho.isEmpty() == false) {
-			int cont = 0;
-			int id = 0;
-			int qtd = 0;
 			
-			for (Item c : carrinho) {
-				cont++;
-				c.setId(cont); // settando o id de cada um dos produtos de forma manual, 100% atualizada igual bomba patch
-			}	
-
+			int cont = setarIdItem(carrinho);
 			
 			while(id == 0) { // enquanto id for maior ou menor que o contador que é 
 				mostrar(carrinho, input); // a quantidade de itens no carrinho, vai rodar
@@ -128,11 +125,6 @@ public class Item{
 		}
 	}
 
-	// Exclui o carrinho de compras ao finalizar
-	public void excluir(List<Item> carrinho) {
-		carrinho.clear(); // função de limpar o carrinho, mt útil
-	}
-
 	// Finaliza o carrinho de compras
 	public void finalizar(List<Item> carrinho, List<Cliente> clientela, Cliente fregues, Historico loja, Scanner input ) {
 		if(carrinho.isEmpty() == false) {
@@ -146,26 +138,102 @@ public class Item{
 					
 					
 					if(op == 'S' || op == 's') {  // DE FATO FINALIZAR O CARRINHO 
+						
 						System.out.print("Digite o ID do funcionário: ");
 						String idFuncionario = input.next();
+						
 						System.out.print("Digite o cpf do cliente: ");
 						String cpf = input.next();
 						
-						fregues.testeCadastro(clientela, input, cpf);
+						System.out.println("Ao efetuar o cadastro na loja, os descontos são maiores!");
+						int aux1 = 0; // pra executar o while enquanto não for respondida a pergunta
 						
-						List<Item> carrinhoClone = new ArrayList<Item>();
+						boolean taNoClientela = false;
 						
-						for(Item cc : carrinho) { // clonando o carrinho atual, para podermos zerar no final do processo de finalizar
-							carrinhoClone.add(cc);
+						for(Cliente c : clientela) {
+
+							if(cpf.equals(c.getCpf())) { // quando for comparar string tem que usar essa função equals.
+								taNoClientela = true;
+							}
 						}
 						
+						if(taNoClientela == false) {
+							System.out.print("Digite o nome completo: ");
+							input.nextLine();
+							String nome = input.nextLine();
+							
+							
+							System.out.println("Ao efetuar o cadastro na loja, os descontos são maiores!");
+							while(aux1 == 0) {
+								System.out.print("Deseja criar um cadastro? [S/N] ");
+								
+								char op1 = input.next().charAt(0);
+								
+								if(op1 == 'N' || op1 == 'n' || op1 == 'S' || op1 == 's') {  // cadastrar ou não
+									aux1 = 1;
+									
+									if(op1 == 'S' || op1 == 's') {  // fazer o cadastro 
+										
+										System.out.print("Digite o email: ");
+										String email = input.next();
+										
+										System.out.print("Digite o cep: ");
+										String cep = input.next();
+										
+										System.out.print("Digite o telefone: ");
+										String telefone = input.next();
+										
+										System.out.print("Digite o dia de nascimento: ");
+										int dia = input.nextInt();
+										
+										System.out.print("Digite o mês de nascimento: ");
+										int mes = input.nextInt();
+										
+										System.out.print("Digite o ano de nascimento: ");
+										int ano = input.nextInt();
+										
+										
+										clientela.add(new Cliente(nome, cpf, email, cep, telefone, LocalDate.of(ano, mes, dia)));
+										
+									}
+									
+									if(op1 == 'N' || op1 == 'n') { // não fazer o cadastro, mas de qualquer jeito armazena dados fantasmas " "  juntamente ao cpf do cliente no clientela
+										System.out.println("Ok.");
+										
+										clientela.add(new Cliente(nome, cpf, "", "", "", LocalDate.of(1900, 12, 31)));
+									}
+									
+								} else {
+									System.out.println("Opção inválida.");
+								}
+							}
+						}
+					
+						// int desconto = 0
+						// é aniversário? se sim - desconto = 1
+						// está a cima de 1200? se sim - desconto = desconto + 1
+						// está a cima de 3000? se sim - desconto = desconto + 1
+						// total = total - total *(desconto*0.05)
 						
 						
-						loja.realizarVendas(new Transacao(cpf, idFuncionario, LocalDate.now(), carrinhoClone));
+						List<Item> carrinhoClone = new ArrayList<Item>();
+						double total = 0;
+						for(Item cc : carrinho) { // clonando o carrinho atual, para podermos zerar no final do processo de finalizar
+							carrinhoClone.add(cc);
+							total = total + cc.getPreco()*cc.getQtd();
+						}
+						
+						if(total >= 1200) {
+							total = total - total * 0.05;
+						}
+						
+						//if(novoCliente.get)
 						
 						
+						loja.realizarVendas(new Transacao(cpf, idFuncionario, LocalDate.now(), carrinhoClone, total));
+
 						
-						excluir(carrinho);
+						carrinho.clear();
 					}
 					if(op == 'N' || op == 'n') {
 						System.out.println("Voltando ao menu...");
@@ -180,6 +248,15 @@ public class Item{
 		}
 	}
 	
+	private int setarIdItem(List<Item> carrinho) {
+		int cont = 0;
+		
+		for (Item c : carrinho) {
+			cont++;
+			c.setId(cont); // settando o id de cada um dos produtos de forma manual, 100% atualizada igual bomba patch
+		}	
+		return cont; // retorna quantos produtos tem no estoque
+	}
 	
 	// Get e Set
 	public String getNome() {

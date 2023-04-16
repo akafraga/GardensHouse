@@ -14,8 +14,7 @@ public class Produto {
 		
 		
 	// Construtor padrão
-	public Produto(int id, String nome, String descricao, double preco) {
-		this.id = id;
+	public Produto(String nome, String descricao, double preco) {
 		this.nome = nome;
 		this.descricao = descricao;
 		this.preco = preco;
@@ -29,6 +28,7 @@ public class Produto {
 	// Mostra os produtos em estoque
 	public void mostrar(List<Produto> estoque) {
 		if(estoque.isEmpty() == false) {
+			
 			for (Produto e : estoque) {
 	        	System.out.println(e.getId() + " - Produto: " + e.getNome() + " --- Descrição: " + e.getDescricao() + " --- Preço: " + e.getPreco());
 	        }
@@ -61,20 +61,29 @@ public class Produto {
 	
 	// Cria o estoque
 	public void criar(List<Produto> estoque) {
-		estoque.add(new Produto(1, "Guitarra", "Stratocaster vermelha", 1200));
-		estoque.add(new Produto(2, "Bateria", "Bateria com 4 pratos e 2 pedais",  3500));
-		estoque.add(new Produto(3, "Teclado", "Clássico elétrico preto",  1500));
-		estoque.add(new Produto(4, "Piano", "De calda preto", 1200));
-		estoque.add(new Produto(5, "Amplificador", "Meteoro 100w",  3500));
-		estoque.add(new Produto(6, "Banco bateria", "Simples 3 alturas",  1500));
-		estoque.add(new Produto(7, "Monitores de Audio", "EDIFIER", 1200));
-		estoque.add(new Produto(8, "Microfone Condensador", "Behringer",  3500));
-		estoque.add(new Produto(9, "Baixo", "Jazz Bazz Fender",  1500));
-		estoque.add(new Produto(10, "Guitarra 7 Cordas", "Ibanez 7 cordas preta", 1200));
-		estoque.add(new Produto(11, "Vionlino", "Arco de madeira e 4 cordas",  3500));
-		estoque.add(new Produto(12, "Baixolão", "4 Cordas acústico",  1500));  
+		estoque.add(new Produto("Guitarra", "Stratocaster vermelha", 1200));
+		estoque.add(new Produto("Bateria", "Bateria com 4 pratos e 2 pedais",  3500));
+		estoque.add(new Produto("Teclado", "Clássico elétrico preto",  1500));
+		estoque.add(new Produto("Piano", "De calda preto", 1200));
+		estoque.add(new Produto("Amplificador", "Meteoro 100w",  3500));
+		estoque.add(new Produto("Banco bateria", "Simples 3 alturas",  1500));
+		estoque.add(new Produto("Monitores de Audio", "EDIFIER", 1200));
+		estoque.add(new Produto("Microfone Condensador", "Behringer",  3500));
+		estoque.add(new Produto("Baixo", "Jazz Bazz Fender",  1500));
+		estoque.add(new Produto( "Guitarra 7 Cordas", "Ibanez 7 cordas preta", 1200));
+		estoque.add(new Produto( "Vionlino", "Arco de madeira e 4 cordas",  3500));
+		estoque.add(new Produto("Baixolão", "4 Cordas acústico",  1500));  
+		setarIdProduto(estoque);
 	}
-
+	
+	private void setarIdProduto(List<Produto> estoque) {
+		int cont = 0;
+		for (Produto p : estoque) {
+			cont++;
+			p.setId(cont); // settando o id de cada um dos produtos de forma manual, 100% atualizada igual bomba patch
+		}		
+	}
+	
 	// Get e Set
 	public String getNome() {
 		return nome;

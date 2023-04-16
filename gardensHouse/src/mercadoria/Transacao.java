@@ -10,16 +10,16 @@ public class Transacao {
     private String idVenda;
     private LocalDate dataDaCompra;
     private List<Item> carrinho;
+    private double total;
 
     
-    public Transacao(String cpfCliente, String idFuncionario, LocalDate dataDaCompra, List<Item> carrinho) {
+    public Transacao(String cpfCliente, String idFuncionario, LocalDate dataDaCompra, List<Item> carrinho, double total) {
         this.cpfCliente = cpfCliente;
         this.idFuncionario = idFuncionario;
         this.dataDaCompra = dataDaCompra;
         this.carrinho = carrinho;
+        this.total = total;
     }
-    
-    
     
     // getters e setters
 
@@ -61,6 +61,14 @@ public class Transacao {
 
 	public void setIdCompra(String idVenda) {
 		this.idVenda = idVenda;
+	}
+
+	public double getTotal() {
+		return total;
+	}
+
+	public void setTotal(double total) {
+		this.total = total;
 	}
 	
 }

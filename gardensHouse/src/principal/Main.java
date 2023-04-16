@@ -15,6 +15,7 @@ public class Main {
 
 	public static void main(String[] args) {
 		
+		
 		List<Produto> estoqueDaLoja = new ArrayList<Produto>(); // estoque da loja
 		List<Funcionario> colaboradores = new ArrayList<Funcionario>(); // banco de dados com os funcionários
 		List<Item> carrinhoDeCompras = new ArrayList<Item>(); // carrinho de compras atual
@@ -43,7 +44,7 @@ public class Main {
 			System.out.print("| Opção 2 - Remover do Carrinho      |\n");
 			System.out.print("| Opção 3 - Mostrar o Carrinho       |\n");
 			System.out.print("| Opção 4 - Finalizar o Carrinho     |\n");
-			System.out.print("| Opção 5 - Histórico de Vendas      |\n");
+			System.out.print("| Opção 5 - Menu Avançado            |\n");
 			System.out.print("| Opção 6 - Sair                     |\n");
 			System.out.print("|------------------------------------|\n");
 
@@ -67,9 +68,10 @@ public class Main {
                 	kart.finalizar(carrinhoDeCompras, clientela, fregues, loja, input);
                 	break;
                 
-                case 5:
+                case 5: // menuAvançado - exibirVendas, mostrarClientela, mostrarEstoque
+                	
                 	exibirVendas(loja);
-                	break;	
+                	break;
                 
                 case 6:
                     System.out.println("Saindo...");
@@ -106,6 +108,7 @@ public class Main {
         for (Item i : carrinho) {
             total += i.getPreco();
         }
+        
         return total;
     }
 
