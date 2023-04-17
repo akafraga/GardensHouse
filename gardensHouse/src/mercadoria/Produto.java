@@ -28,10 +28,14 @@ public class Produto {
 	// Mostra os produtos em estoque
 	public void mostrar(List<Produto> estoque) {
 		if(estoque.isEmpty() == false) {
-			
+			System.out.println("|##--             Estoque             --##|");
+			System.out.println("|-----------------------------------------|");
 			for (Produto e : estoque) {
-	        	System.out.println(e.getId() + " - Produto: " + e.getNome() + " --- Descrição: " + e.getDescricao() + " --- Preço: " + e.getPreco());
-	        }
+	        	//System.out.println(e.getId() + " - Produto: " + e.getNome() + " --- Descrição: " + e.getDescricao() + " --- Preço: " + e.getPreco());
+	        	
+				System.out.printf("| %d - %s -- %s --- %.2f", e.getId(), e.getNome(), e.getDescricao(), e.getPreco());
+				System.out.println();
+			}
 		} else {
 			System.out.println("Produto vazio.");
 		}
@@ -115,5 +119,7 @@ public class Produto {
 
 	public void setId(int id) {
 		this.id = id;
-	}	
+	}
+
+
 }

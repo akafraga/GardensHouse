@@ -70,7 +70,7 @@ public class Main {
                 
                 case 5: // menuAvançado - exibirVendas, mostrarClientela, mostrarEstoque
                 	
-                	menuAvancado(loja, input);
+                	menuAvancado(estoqueDaLoja, clientela, colaboradores, loja, armazem, fregues, empregado, input);
                 	break;
                 
                 case 6:
@@ -86,9 +86,8 @@ public class Main {
 	}
 	
 	
-	public static void menuAvancado(Historico loja, Scanner input) {
+	public static void menuAvancado(List<Produto> estoqueDaLoja, List<Cliente> clientela, List<Funcionario> colaboradores, Historico loja, Produto armazem, Cliente fregues, Funcionario empregado, Scanner input) {
 		int op = 0;
-		System.out.println();
 		while (op != 7) {
 			System.out.print("|##-- Menu avançado da Garden's House --##|\n");
 			System.out.print("|-----------------------------------------|\n");
@@ -104,10 +103,10 @@ public class Main {
 			
 			System.out.print("-> Opção escolhida: ");
             op = input.nextInt();
-			
+			System.out.println();
 			switch (op) {
 				case 1: // ver estoque
-					System.out.println("Não está funcionando ainda.");
+					armazem.mostrar(estoqueDaLoja);
 					break;
 				
 				case 2: // adicionar produto ao estoque
@@ -127,7 +126,7 @@ public class Main {
 			            double total = 0;
 			            for (Item i : t.getCarrinho()) {
 			                //System.out.println("- " + i.getNome() + " - R$" + i.getPreco());
-			                System.out.printf("- %s - R$ %.2f\n", i.getNome(), i.getPreco());
+			                System.out.printf("%d - %s - R$ %.2f\n", i.getQtd(), i.getNome(), i.getPreco());
 			                total = total + i.getPreco();
 			            }
 			            if(total == t.getTotal()) {
@@ -157,6 +156,7 @@ public class Main {
 					System.out.println("Opção inválida.");
                     break;
 			}
+		System.out.println("\n");
 		}
 	}
 

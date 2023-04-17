@@ -3,18 +3,8 @@ package pagamento;
 import java.util.Scanner;
 import java.util.Random;
 
-public class Pagamento {
-	/*
-	 * acredito que nessa classe pagamento devemos colocar todos os
-	 * tipos de pagamento, criando métodos específicos pra cada um.
-	 * 
-	 * 1. Cartão		inserir dados do cartão
-	 * 1.1. de Crédito	e finalizar a compra
-	 * 1.2. de Débito	
-	 * 2. Pix			gerar código aleatório de pix de preferência funcional
-	 * 3. Dinheiro		perguntar valor pago e retornar quanto de troco temos que dar.
-	 */
-	
+public class Pagamento implements IPagamento{
+
 	private String tipo;
 	
 	public Pagamento() {
@@ -35,6 +25,7 @@ public class Pagamento {
 		Random random = new Random();
 		System.out.println();
 		int aux = 0;
+		Pagamento p = new Pagamento();
 		while(aux == 0) {
 			System.out.println();
 			System.out.println("|##------- Métodos de Pagamento -------##|");
@@ -50,6 +41,7 @@ public class Pagamento {
 			double valorCliente = input.nextDouble();
 			double troco = valorCliente - total;
 			double restante = 0;
+			int metodo1 = metodo;
 			switch (metodo) {
 			
 			// 1 = Dinheiro
@@ -57,74 +49,85 @@ public class Pagamento {
 	
 					if(valorCliente<total) {
 						restante = total - valorCliente;
-						System.out.printf("Faltam %.2f reais\n", restante);
+						System.out.printf("Faltam R$%.2f reais\n", restante);
 						break;
 					}
+					
 					if(troco == 0) {
-						System.out.println("Obrigado!");
+						System.out.println(p.mensagem());
+						
+						
 					} else {
-						System.out.printf("Troco: %.2f\n", troco);
-						System.out.println("Obrigado!");
+						System.out.printf("Troco: R$%.2f\n", troco);
+						System.out.println(p.mensagem());
 					}
 					aux = 1;
 					break;
 				
 				// 2 = Pix
 				case 2:
-					if(valorCliente<total) {
-						restante = total - valorCliente;
-						System.out.printf("Faltam %.2f reais.\n", restante);
-						break;
-					}
-					
+
 					System.out.println("A chave aleatória pix é: \n");
 					int codigoPix = random.nextInt();
 					System.out.println(codigoPix);
 					
-					System.out.println("Obrigado!");
+					if(valorCliente<total) {
+						restante = total - valorCliente;
+						System.out.printf("Faltam R$%.2f reais.\n", restante);
+						break;
+					}
+					
+					System.out.println(p.mensagem());
+					
 					aux = 1;
 					break;
 					
 				// 3 = Cartao de Debito
 				case 3:
-					System.out.println("Digite os 16 números do cartão separando-os por - : \n");
-					String numerosCartaoDebito = input.next();
+					//System.out.print("Digite os 16 números do cartão separando-os por - :");
+					//String numerosCartaoDebito = input.next();
 					
-					System.out.println("Digite a senha: \n");
-					String codigoCartaoDebito = input.next();
+					//System.out.println("Digite a senha: \n");
+					//String codigoCartaoDebito = input.next();
 					
 					if(valorCliente<total) {
 						restante = total - valorCliente;
-						System.out.printf("Faltam %.2f reais.\n", restante);
+						System.out.printf("Faltam R$%.2f reais.\n", restante);
 						break;
 					}
-					
-					System.out.println("Obrigado!");
+
+					System.out.println(p.mensagem());
+
 					
 					aux = 1;
 					break;
 					
 				// 4 = Cartao de Credito
 				case 4:
-					System.out.println("Digite os 16 números do cartão separando-os por - : \n");
-					String numerosCartaoCredito = input.next();
+					//System.out.println("Digite os 16 números do cartão separando-os por - : \n");
+					//String numerosCartaoCredito = input.next();
 					
-					System.out.println("Digite a senha: \n");
-					String codigoCartaoCredito = input.next();
+					//System.out.println("Digite a senha: \n");
+					//String codigoCartaoCredito = input.next();
 					
 					if(valorCliente<total) {
 						restante = total - valorCliente;
-						System.out.printf("Faltam %.2f reais.\n", restante);
+						System.out.printf(">>> Faltam R$%.2f reais.\n", restante);
 						break;
 					}
 					
-					System.out.println("Obrigado!");
+					System.out.println(p.mensagem());
 					
 					aux = 1;
 					break;
 				}
 		}
 		return metodo;
+	}
+
+	@Override
+	public String mensagem() {
+		return ">>> Obrigado por comprar conosco!";
 	}
 	
 }
