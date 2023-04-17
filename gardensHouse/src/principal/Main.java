@@ -110,7 +110,7 @@ public class Main {
 					armazem.mostrar(estoqueDaLoja);
 					break;
 				
-				case 2: // adicionar produto ao estoque
+				case 2: // adicionar produto ao estoque -- está quebrada com a implementação do estoque novo.
 					armazem.adicionar(estoqueDaLoja, input);
 					break;
 				
