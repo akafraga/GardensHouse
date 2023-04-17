@@ -21,12 +21,15 @@ public class Cliente extends Pessoa{
 	}
 	
 	@Override // // Reescreve o mostrarDados da classe mãe
-	public void mostrarDados() {
-		System.out.println(	"Nome -------- " + nome +
-							"CEP --------- " + cep +
-							"CPF --------- " + cpf +
-							"Telefone ---- " + telefone +
-							"Nascimento -- " + dataDeNascimento);
+	public void mostrarDados() {	
+		System.out.println("|-----------------------------------------|");
+		System.out.println("| Nome: " + this.getNome());
+	    System.out.println("| CPF: " + this.getCpf());
+	    System.out.println("| Data de nascimento: " + this.getDataDeNascimento().getDayOfMonth() + "/" + this.getDataDeNascimento().getMonthValue() + "/" + this.getDataDeNascimento().getYear());
+	    System.out.println("| Email: " + this.getEmail());
+	    System.out.println("| Endereço: " + this.getCep());
+	    System.out.println("| Telefone: " + this.getTelefone());
+	    System.out.println("|-----------------------------------------|\n");
 	}
 	
 	

@@ -181,9 +181,8 @@ public class Item{
 	// Finaliza o carrinho de compras
 	public void finalizar(List<Item> carrinho, List<Cliente> clientela, Cliente fregues, Historico loja, Scanner input ) {
 		if(carrinho.isEmpty() == false) {
-			
-			System.out.println("|##-- Função p Finalizar ao Carrinho --##|");
 			System.out.println("|----------------------------------------|");
+			System.out.println("|##-- Função p Finalizar ao Carrinho --##|");
 			mostrar(carrinho, input);
 			int aux = 0; // pra executar o while enquanto não for respondida a pergunta
 			int dia = 0, mes = 0;  

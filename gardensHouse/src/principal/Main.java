@@ -68,7 +68,7 @@ public class Main {
                 	kart.finalizar(carrinhoDeCompras, clientela, fregues, loja, input);
                 	break;
                 
-                case 5: // menuAvançado - exibirVendas, mostrarClientela, mostrarEstoque
+                case 5: // menuAvançado
                 	
                 	menuAvancado(estoqueDaLoja, clientela, colaboradores, loja, armazem, fregues, empregado, input);
                 	break;
@@ -121,27 +121,26 @@ public class Main {
 				case 4: // ver o historico de vendas
 					if(loja.getHistoricoDeVendas().isEmpty() == false) {
 						for (Transacao t : loja.getHistoricoDeVendas()) {
-				            System.out.println("CPF do cliente: " + t.getCpfCliente());
-				            System.out.println("ID do funcionário: " + t.getIdFuncionario());
-				            System.out.println("Data da compra: " + t.getDataDaCompra());
-				            System.out.println("Carrinho de compras:");
+							System.out.println("|-----------------------------------------|");
+				            System.out.printf(	">>> CPF: %s - %d/%d/%d - ID FUNCIONARIO: %s \n", t.getCpfCliente(), t.getDataDaCompra().getDayOfMonth(), 
+				            					t.getDataDaCompra().getMonthValue(), t.getDataDaCompra().getYear(), t.getIdFuncionario());
 				            double total = 0;
 				            for (Item i : t.getCarrinho()) {
 	
-				                System.out.printf("%d - %s - R$ %.2f\n", i.getQtd(), i.getNome(), i.getPreco());
+				                System.out.printf(">>> %d - %s - R$ %.2f\n", i.getQtd(), i.getNome(), i.getPreco());
 				                total = total + i.getPreco();
 				            }
 				            if(total == t.getTotal()) {
 	
-				            	System.out.printf("Total da compra: R$ %.2f\n", t.getTotal());
+				            	System.out.printf(">>> Total da compra: R$ %.2f\n", t.getTotal());
 				            } else {
 	
-				            	System.out.printf("Total da compra com desconto: R$ %.2f\n", t.getTotal());
+				            	System.out.printf(">>> Total da compra com desconto: R$ %.2f\n", t.getTotal());
 				            }
 				            System.out.println();
 				        }
 					} else {
-						System.out.println("Histórico de Vendas vazio.");
+						System.out.println(">>> Histórico de Vendas vazio.");
 					}
 					break;
 			

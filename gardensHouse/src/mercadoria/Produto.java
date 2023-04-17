@@ -10,7 +10,7 @@ public class Produto {
 	// Declaração de variável
 	private String nome, descricao, tipo;
 	private double preco;
-	private int id;
+	private int id, qtdNoEstoque;
 		
 		
 	// Construtor padrão
@@ -19,6 +19,7 @@ public class Produto {
 		this.nome = nome;
 		this.descricao = descricao;
 		this.preco = preco;
+		//this.qtdNoEstoque = qtdNoEstoque;
 	}
 		
 	// Construtor para uso de métodos
@@ -87,7 +88,7 @@ public class Produto {
 				System.out.println(">>> Item removido do estoque!\n\n");
 			}
 		}
-		//setarIdProduto(estoque);
+		setarIdProduto(estoque);
 	}
 	
 	// Exclui o estoque
@@ -153,6 +154,7 @@ public class Produto {
 		setarIdProduto(estoque);
 	}
 	
+	// Seta o id do produto.
 	private void setarIdProduto(List<Produto> estoque) {
 		int cont = 0;
 		for (Produto p : estoque) {
@@ -200,6 +202,14 @@ public class Produto {
 
 	public void setTipo(String tipo) {
 		this.tipo = tipo;
+	}
+
+	public int getQtdNoEstoque() {
+		return qtdNoEstoque;
+	}
+
+	public void setQtdNoEstoque(int qtdNoEstoque) {
+		this.qtdNoEstoque = qtdNoEstoque;
 	}
 
 
