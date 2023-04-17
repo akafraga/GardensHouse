@@ -27,7 +27,9 @@ public class Produto {
 	
 	// Mostra os produtos em estoque
 	public void mostrar(List<Produto> estoque) {
+		setarIdProduto(estoque);
 		if(estoque.isEmpty() == false) {
+			System.out.println("|-----------------------------------------|\n");
 			System.out.println("|##--             Estoque             --##|");
 			System.out.println("|-----------------------------------------|");
 			for (Produto e : estoque) {
@@ -37,25 +39,38 @@ public class Produto {
 				System.out.println();
 			}
 		} else {
-			System.out.println("Produto vazio.");
+			System.out.println(">>> Produto vazio.");
 		}
 	}	
 	
 	// Adiciona um produto ao estoque
-	public void adicionar(List<Produto> estoque) { // não ta feita ainda.
-		
+	public void adicionar(List<Produto> estoque, Scanner input) { // não ta feita ainda.
+		System.out.println("|----------------------------------------|");
+		System.out.println("|##-- Função p Adicionar ao Estoque  --##|");
+		System.out.println("|----------------------------------------|");
+		input.nextLine();
+	   	System.out.print("-> Digite o nome do produto: ");
+		String nome = input.nextLine();
+		System.out.print("-> Digite uma descrição do produto: ");
+		String descricao = input.nextLine();
+		System.out.print("-> Digite o preço do produto: ");
+		double preco = input.nextDouble();
+		estoque.add(new Produto(nome, descricao, preco));
+		setarIdProduto(estoque);
 	}
 	
 	// Remove um produto do estoque
 	public void remover(List<Produto> estoque, Scanner input) { // prototipo dela, mas não ta feita ainda.
-		System.out.print("\nDigite o código: ");
+		mostrar(estoque);
+		System.out.print("-> Digite o código: ");
 		int id = input.nextInt();
 		for (Produto e : estoque) {
 			if (e.getId() == id) {
 				estoque.remove(id - 1);
-				System.out.println("Item removido do estoque!\n\n");
+				System.out.println(">>> Item removido do estoque!\n\n");
 			}
 		}
+		//setarIdProduto(estoque);
 	}
 	
 	// Exclui o estoque

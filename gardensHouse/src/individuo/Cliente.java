@@ -2,7 +2,6 @@ package individuo;
 
 // Importando bibliotecas que usaremos
 import java.time.LocalDate;
-import java.util.List;
 
 // Essa classe herda tudo da classe Pessoa e adiciona uma data de nascimento
 public class Cliente extends Pessoa{
@@ -40,9 +39,5 @@ public class Cliente extends Pessoa{
 		this.dataDeNascimento = dataDeNascimento;
 	}
 
-	public void criar(List<Cliente> clientela) {
-		// TODO Auto-generated method stub
-		
-	}
 }
 

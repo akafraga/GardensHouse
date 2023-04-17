@@ -31,12 +31,12 @@ public class Main {
 
 		
 		armazem.criar(estoqueDaLoja);
-		fregues.criar(clientela);
 		empregado.criar(colaboradores);
 		
 		
 		int op = 0;
-        while (op != 6) {
+        while (op != 9) {
+        	System.out.print("|----------------------------------------|\n");
         	System.out.print("|##---- Bem vindo a Garden's House ----##|\n");
 			System.out.print("|----------------------------------------|\n");
 			System.out.print("| Selecione uma operação:                |\n");
@@ -45,7 +45,7 @@ public class Main {
 			System.out.print("| Opção 3 - Mostrar o Carrinho           |\n");
 			System.out.print("| Opção 4 - Finalizar o Carrinho         |\n");
 			System.out.print("| Opção 5 - Menu Avançado                |\n");
-			System.out.print("| Opção 6 - Sair                         |\n");
+			System.out.print("| Opção 9 - Sair                         |\n");
 			System.out.print("|----------------------------------------|\n");
 
 			System.out.print("-> Opção escolhida: ");
@@ -73,7 +73,7 @@ public class Main {
                 	menuAvancado(estoqueDaLoja, clientela, colaboradores, loja, armazem, fregues, empregado, input);
                 	break;
                 
-                case 6:
+                case 9:
                     System.out.println("Saindo...");
                     break;
                     
@@ -88,7 +88,8 @@ public class Main {
 	
 	public static void menuAvancado(List<Produto> estoqueDaLoja, List<Cliente> clientela, List<Funcionario> colaboradores, Historico loja, Produto armazem, Cliente fregues, Funcionario empregado, Scanner input) {
 		int op = 0;
-		while (op != 7) {
+		while (op != 9) {
+			System.out.print("|-----------------------------------------|\n");
 			System.out.print("|##-- Menu avançado da Garden's House --##|\n");
 			System.out.print("|-----------------------------------------|\n");
 			System.out.print("| Selecione uma operação:                 |\n");
@@ -98,7 +99,7 @@ public class Main {
 			System.out.print("| Opção 4 - Ver histórico de vendas       |\n");
 			System.out.print("| Opção 5 - Ver lista de clientes         |\n");
 			System.out.print("| Opção 6 - Ver lista de funcionários     |\n");
-			System.out.print("| Opção 7 - Sair                          |\n");
+			System.out.print("| Opção 9 - Sair                          |\n");
 			System.out.print("|-----------------------------------------|\n");
 			
 			System.out.print("-> Opção escolhida: ");
@@ -110,45 +111,66 @@ public class Main {
 					break;
 				
 				case 2: // adicionar produto ao estoque
-					System.out.println("Não está funcionando ainda.");
+					armazem.adicionar(estoqueDaLoja, input);
 					break;
 				
 				case 3: // remover produto do estoque
-					System.out.println("Não está funcionando ainda.");
+					armazem.remover(estoqueDaLoja, input);
 					break;
 					
 				case 4: // ver o historico de vendas
-					for (Transacao t : loja.getHistoricoDeVendas()) {
-			            System.out.println("CPF do cliente: " + t.getCpfCliente());
-			            System.out.println("ID do funcionário: " + t.getIdFuncionario());
-			            System.out.println("Data da compra: " + t.getDataDaCompra());
-			            System.out.println("Carrinho de compras:");
-			            double total = 0;
-			            for (Item i : t.getCarrinho()) {
-			                //System.out.println("- " + i.getNome() + " - R$" + i.getPreco());
-			                System.out.printf("%d - %s - R$ %.2f\n", i.getQtd(), i.getNome(), i.getPreco());
-			                total = total + i.getPreco();
-			            }
-			            if(total == t.getTotal()) {
-			            	//System.out.println("Total da compra: R$" + t.getTotal());
-			            	System.out.printf("Total da compra: R$ %.2f\n", t.getTotal());
-			            } else {
-			            	//System.out.println("Total da compra com desconto: R$" + t.getTotal());
-			            	System.out.printf("Total da compra com desconto: R$ %.2f\n", t.getTotal());
-			            }
-			            System.out.println();
-			        }
+					if(loja.getHistoricoDeVendas().isEmpty() == false) {
+						for (Transacao t : loja.getHistoricoDeVendas()) {
+				            System.out.println("CPF do cliente: " + t.getCpfCliente());
+				            System.out.println("ID do funcionário: " + t.getIdFuncionario());
+				            System.out.println("Data da compra: " + t.getDataDaCompra());
+				            System.out.println("Carrinho de compras:");
+				            double total = 0;
+				            for (Item i : t.getCarrinho()) {
+	
+				                System.out.printf("%d - %s - R$ %.2f\n", i.getQtd(), i.getNome(), i.getPreco());
+				                total = total + i.getPreco();
+				            }
+				            if(total == t.getTotal()) {
+	
+				            	System.out.printf("Total da compra: R$ %.2f\n", t.getTotal());
+				            } else {
+	
+				            	System.out.printf("Total da compra com desconto: R$ %.2f\n", t.getTotal());
+				            }
+				            System.out.println();
+				        }
+					} else {
+						System.out.println("Histórico de Vendas vazio.");
+					}
 					break;
 			
-				case 5: // ver a lista de clientes da loja
-					System.out.println("Não está funcionando ainda.");
+				case 5: // ver a lista de clientes da loja					
+					
+					if(clientela.isEmpty() == false) {
+						for(Cliente c : clientela) {
+							c.mostrarDados();
+						}
+					} else {
+						System.out.println("Não existem clientes no banco de dados.");
+					}
+					
 					break;
 					
 				case 6: // ver a lista de funcionarios
-					System.out.println("Não está funcionando ainda.");
+
+					if(colaboradores.isEmpty() == false) {
+						
+						for(Funcionario f : colaboradores) {
+							f.mostrarDados();
+						}
+					} else {
+						System.out.println("Não existem funcionários no banco de dados.");
+					}
+
 					break;
 					
-				case 7:
+				case 9:
 					System.out.println("Saindo...");
 					break;
 					

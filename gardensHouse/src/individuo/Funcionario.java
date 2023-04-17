@@ -7,11 +7,11 @@ import java.util.List;
 public class Funcionario extends Pessoa {
 
 	// Declaração de variável
-	private String id;
+	private int id;
 	
 	// Construtor padrão
-	public Funcionario(String id, String nome, String cpf, String email, String endereco, String telefone) {
-		super(nome, cpf, email, endereco, telefone);
+	public Funcionario(int id, String nome, String cpf, String email, String cep, String telefone) {
+		super(nome, cpf, email, cep, telefone);
 		this.id = id;
 	}
 	
@@ -22,31 +22,32 @@ public class Funcionario extends Pessoa {
 	
 	@Override // Reescreve o mostrarDados da classe mãe
 	public void mostrarDados() {
-		System.out.println(	"ID Funcionário -- " + id +
-							"Nome -------- " + nome +
-							"Telefone ---- " + telefone);
+		System.out.println("|-----------------------------------------|");
+		System.out.println("| ID: " + this.id);
+		System.out.println("| Nome: " + this.getNome());
+	    System.out.println("| CPF: " + this.getCpf());
+	    System.out.println("| Email: " + this.getEmail());
+	    System.out.println("| Endereço: " + this.getCep());
+	    System.out.println("| Telefone: " + this.getTelefone());
+	    System.out.println("|-----------------------------------------|\n");
 	}
 	
 	// Cria o banco de dados com o nome dos funcionários
-	public void criarFuncionarios(List<Funcionario> colaboradores) {        
-        colaboradores.add(new Funcionario("0", "Gabriel Silveira", "11111111111", "", "", ""));
-        colaboradores.add(new Funcionario("1", "Gabriel Fraga", "11111111112", "", "", ""));
-        colaboradores.add(new Funcionario("2", "Livia Pessanha", "11111111113", "", "", ""));
-        colaboradores.add(new Funcionario("3", "Maria Antonia", "11111111114", "", "", ""));
-        colaboradores.add(new Funcionario("4", "Luan Saramago", "11111111115", "", "", ""));
+	public void criar(List<Funcionario> colaboradores) {        
+        colaboradores.add(new Funcionario(0, "Gabriel Silveira", "11111111111", "", "", ""));
+        colaboradores.add(new Funcionario(1, "Gabriel Fraga", "11111111112", "", "", ""));
+        colaboradores.add(new Funcionario(2, "Livia Pessanha", "11111111113", "", "", ""));
+        colaboradores.add(new Funcionario(3, "Maria Antonia", "11111111114", "", "", ""));
+        colaboradores.add(new Funcionario(4, "Luan Saramago", "11111111115", "", "", ""));
 	}
 	
 	// Get e Set
-	public String getId() {
+	public int getId() {
 		return id;
 	}
 	
-	public void setId(String id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
-	public void criar(List<Funcionario> colaboradores) {
-		// TODO Auto-generated method stub
-		
-	}
 }

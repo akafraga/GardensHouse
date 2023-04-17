@@ -28,6 +28,7 @@ public class Pagamento implements IPagamento{
 		Pagamento p = new Pagamento();
 		while(aux == 0) {
 			System.out.println();
+			System.out.println("|----------------------------------------|\n");
 			System.out.println("|##------- Métodos de Pagamento -------##|");
 			System.out.println("| Opção 1 - Dinheiro                     |");
 			System.out.println("| Opção 2 - Pix                          |");

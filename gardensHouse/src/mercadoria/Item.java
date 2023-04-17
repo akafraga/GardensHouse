@@ -40,6 +40,7 @@ public class Item{
 	// Mostra o carrinho de compras
 	public void mostrar(List<Item> carrinho, Scanner input) {
 		if(carrinho.isEmpty() == false) {
+			System.out.println("|----------------------------------------|");
 			System.out.println("|          Carrinho de Compras           |");
 			System.out.println("|----------------------------------------|");
 			int cont = 0;
@@ -51,7 +52,7 @@ public class Item{
 	        }
 			
 			for (Item c : carrinho) {
-	        	System.out.printf("| %d - %s - qtd: %d - preço: %.2f", c.getId(), c.getNome(), c.getQtd(), (c.getPreco()*c.getQtd()));
+	        	System.out.printf("| %d - %s - qtd: %d - preço: R$%.2f", c.getId(), c.getNome(), c.getQtd(), (c.getPreco()*c.getQtd()));
 	        	System.out.println();
 	        	total = total + c.getPreco()*c.getQtd();
 	        }
@@ -101,6 +102,7 @@ public class Item{
 
 	// Adiciona um item ao carrinho de compras
 	public void adicionar(List<Produto> estoque, List<Item> carrinho, Scanner input) {
+		System.out.println("|----------------------------------------|");
 		System.out.println("|##-- Função p Adicionar ao Carrinho --##|");
 		System.out.println("|----------------------------------------|");
 	   	System.out.print("-> Digite o código do produto: ");
