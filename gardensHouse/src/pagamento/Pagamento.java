@@ -56,6 +56,7 @@ public class Pagamento implements iPagamento{
 				// 3 = Cartao de Debito
 				case 3:
 					aux = debito(valorCliente, total, restante, input);
+					break;
 					
 				// 4 = Cartao de Credito
 				case 4:	
@@ -121,7 +122,7 @@ public class Pagamento implements iPagamento{
 			int codigoPix = random.nextInt();
 			System.out.println(codigoPix);
 			
-			if(conta == 0 ) {
+			if(conta == 0 ) { 
 				System.out.println(">>> Obrigado por comprar conosco!");
 				return 1;
 			} else {
@@ -129,7 +130,7 @@ public class Pagamento implements iPagamento{
 				System.out.printf(">>> Faltam R$%.2f reais.\n", restante);
 				return 0;
 			}
-		} else {
+		} else { // enésima vez executando um pagamento
 			System.out.printf("\n>>> Valor que falta: %.2f\n", restante);
 			System.out.print("-> Digite quanto recebeu do cliente: ");
 			valorCliente = input.nextDouble();
@@ -152,7 +153,7 @@ public class Pagamento implements iPagamento{
 
 	@Override
 	public int debito(double valorCliente, double total, double restante, Scanner input) {
-		if(restante == 0) {
+		if(restante == 0) {  // primeira vez executando o loop do while
 			System.out.printf("\n>>> Valor da Compra: %.2f\n", total);
 			System.out.print("-> Digite quanto recebeu do cliente: ");
 			valorCliente = input.nextDouble();
@@ -161,12 +162,12 @@ public class Pagamento implements iPagamento{
 			if(conta == 0 ) {
 				System.out.println(">>> Obrigado por comprar conosco!");
 				return 1;
-			} else {
+			} else { 
 				restante = total - valorCliente;
 				System.out.printf(">>> Faltam R$%.2f reais.\n", restante);
 				return 0;
 			}
-		} else {
+		} else {// enésima vez executando um pagamento
 			System.out.printf("\n>>> Valor que falta: %.2f\n", restante);
 			System.out.print("-> Digite quanto recebeu do cliente: ");
 			valorCliente = input.nextDouble();
@@ -185,7 +186,7 @@ public class Pagamento implements iPagamento{
 
 	@Override
 	public int credito(double valorCliente, double total, double restante, Scanner input) {
-		if(restante == 0) {
+		if(restante == 0) { // primeira vez executando o loop do while
 			System.out.printf("\n>>> Valor da Compra: %.2f\n", total);
 			System.out.print("-> Digite quanto recebeu do cliente: ");
 			valorCliente = input.nextDouble();
@@ -199,7 +200,7 @@ public class Pagamento implements iPagamento{
 				System.out.printf(">>> Faltam R$%.2f reais.\n", restante);
 				return 0;
 			}
-		} else {
+		} else { // enésima vez executando um pagamento
 			System.out.printf("\n>>> Valor que falta: %.2f\n", restante);
 			System.out.print("-> Digite quanto recebeu do cliente: ");
 			valorCliente = input.nextDouble();
