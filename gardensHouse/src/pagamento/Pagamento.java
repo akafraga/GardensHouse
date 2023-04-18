@@ -3,7 +3,7 @@ package pagamento;
 import java.util.Scanner;
 import java.util.Random;
 
-public class Pagamento implements IPagamento{
+public class Pagamento implements iPagamento{
 
 	private String tipo;
 	
@@ -25,7 +25,7 @@ public class Pagamento implements IPagamento{
 		Random random = new Random();
 		System.out.println();
 		Pagamento p = new Pagamento();
-		double valorCliente = 0, restante = 0, troco;
+		double valorCliente = 0, restante = 0, troco = 0;
 		
 		int aux = 0;
 		while(aux == 0) {
@@ -45,185 +45,176 @@ public class Pagamento implements IPagamento{
 			
 			// 1 = Dinheiro
 				case 1:
-					if(restante == valorCliente) {
-						System.out.printf("\n>>> Valor da Compra: %.2f\n", total);
-						System.out.print("-> Digite quanto recebeu do cliente: ");
-						valorCliente = input.nextDouble();
-						restante = valorCliente;
-						troco = valorCliente - total;
-						
-						if(troco == 0) {
-							System.out.println(p.mensagem());
-							
-							
-						} else {
-							System.out.printf("Troco: R$%.2f\n", troco);
-							System.out.println(p.mensagem());
-						}
-						aux = 1;
-						break;
-						
-					} else {
-						System.out.printf("\n>>> Valor que falta: %.2f\n", restante);
-						System.out.print("-> Digite quanto recebeu do cliente: ");
-						valorCliente = input.nextDouble();
-						restante = valorCliente;
-						troco = valorCliente - restante;
-						
-						if(troco == 0) {
-							System.out.println(p.mensagem());
-
-						} else {
-							System.out.printf("Troco: R$%.2f\n", troco);
-							System.out.println(p.mensagem());
-						}
-						aux = 1;
-						break;
-					}
+					aux = dinheiro(valorCliente, total, troco, restante, input);
+					break;
 				
 				// 2 = Pix
 				case 2:
-					
-					if(restante == valorCliente) {
-						System.out.printf("\n>>> Valor da Compra: %.2f\n", total);
-						System.out.print("-> Digite quanto recebeu do cliente: ");
-						valorCliente = input.nextDouble();
-						restante = valorCliente;
-						troco = valorCliente - total;
-						
-						System.out.print("A chave aleatória pix é: ");
-						int codigoPix = random.nextInt();
-						System.out.println(codigoPix);
-						
-						if(troco <= 0.04) {
-							System.out.println(p.mensagem());
-							
-							aux = 1;
-							break;
-						}
-						
-						if(valorCliente<total) {
-							restante = total - valorCliente;
-							System.out.printf("Faltam R$%.2f reais.\n", restante);
-							break;
-						}
-						
-						System.out.println(p.mensagem());
-						
-						aux = 1;
-						break;
-						
-					} else {
-						System.out.printf("\n>>> Valor que falta: %.2f\n", restante);
-						System.out.print("-> Digite quanto recebeu do cliente: ");
-						valorCliente = input.nextDouble();
-						restante = valorCliente;
-						troco = valorCliente - restante;
-						
-						System.out.println("A chave aleatória pix é: \n");
-						int codigoPix = random.nextInt();
-						System.out.println(codigoPix);
-						
-						if(valorCliente<total) {
-							restante = total - valorCliente;
-							System.out.printf("Faltam R$%.2f reais.\n", restante);
-							break;
-						}
-						
-						System.out.println(p.mensagem());
-						
-						aux = 1;
-						break;
-					}
-					
+					aux = pix(valorCliente, total, restante, input, random);
+					break;
+				
 				// 3 = Cartao de Debito
 				case 3:
-					if(restante == valorCliente) {
-						System.out.printf("\n>>> Valor da Compra: %.2f\n", total);
-						System.out.print("-> Digite quanto recebeu do cliente: ");
-						valorCliente = input.nextDouble();
-						restante = valorCliente;
-						troco = valorCliente - total;
-						
-						if(valorCliente<total) {
-							restante = total - valorCliente;
-							System.out.printf("Faltam R$%.2f reais.\n", restante);
-							break;
-						}
-
-						System.out.println(p.mensagem());
-
-						
-						aux = 1;
-						break;
-					} else {
-						System.out.printf("\n>>> Valor que falta: %.2f\n", restante);
-						System.out.print("-> Digite quanto recebeu do cliente: ");
-						valorCliente = input.nextDouble();
-						restante = valorCliente;
-						troco = valorCliente - restante;
-						
-						if(valorCliente<total) {
-							restante = total - valorCliente;
-							System.out.printf("Faltam R$%.2f reais.\n", restante);
-							break;
-						}
-						
-						System.out.println(p.mensagem());
-						
-						aux = 1;
-						break;
-					}
-					
-
+					aux = debito(valorCliente, total, restante, input);
 					
 				// 4 = Cartao de Credito
 				case 4:	
-					if(restante == valorCliente) {
-						System.out.printf("\n>>> Valor da Compra: %.2f\n", total);
-						System.out.print("-> Digite quanto recebeu do cliente: ");
-						valorCliente = input.nextDouble();
-						restante = valorCliente;
-						troco = valorCliente - total;
-						
-						if(valorCliente<total) {
-							restante = total - valorCliente;
-							System.out.printf(">>> Faltam R$%.2f reais.\n", restante);
-							break;
-						}
-						
-						System.out.println(p.mensagem());
-						
-						aux = 1;
-						break;
-					} else {
-						System.out.printf("\n>>> Valor que falta: %.2f\n", restante);
-						System.out.print("-> Digite quanto recebeu do cliente: ");
-						valorCliente = input.nextDouble();
-						restante = valorCliente;
-						troco = valorCliente - restante;
-						
-						if(valorCliente<total) {
-							restante = total - valorCliente;
-							System.out.printf(">>> Faltam R$%.2f reais.\n", restante);
-							break;
-						}
-						
-						System.out.println(p.mensagem());
-						
-						aux = 1;
-						break;
-					}
-					
-
+					aux = credito(valorCliente, total, restante, input);
+					break;
 				}
 		}
 		return metodo;
 	}
 
 	@Override
-	public String mensagem() {
-		return ">>> Obrigado por comprar conosco!";
+	public int dinheiro(double valorCliente, double total, double troco, double restante, Scanner input) {
+		if(restante == 0) { // primeira vez executando o loop do while
+			System.out.printf("\n>>> Valor da Compra: %.2f\n", total);
+			System.out.print("-> Digite quanto recebeu do cliente: ");
+			valorCliente = input.nextDouble();
+			troco = valorCliente - total;
+			
+			if(troco == 0 ) {
+				System.out.println(">>> Obrigado por comprar conosco!");
+				return 1;
+			} else if(troco > 0) {
+				System.out.printf(">>>Troco: R$%.2f\n", troco);
+				System.out.println(">>> Obrigado por comprar conosco!");
+				return 1;
+			} else {
+				restante = total - valorCliente;
+				System.out.printf(">>> Faltam R$%.2f reais.\n", restante);
+				return 0;
+			}
+			
+		} else { // enésima vez executando um pagamento
+			System.out.printf("\n>>> Valor que falta: %.2f\n", restante);
+			System.out.print("-> Digite quanto recebeu do cliente: ");
+			valorCliente = input.nextDouble();
+			troco = valorCliente - restante;
+
+			if(troco == 0) {
+				System.out.println(">>> Obrigado por comprar conosco!");
+				return 1;
+	
+			} else if(troco > 0){
+				System.out.printf("Troco: R$%.2f\n", troco);
+				System.out.println(">>> Obrigado por comprar conosco!");
+				return 1;
+			} else {
+				restante = total - valorCliente;
+				System.out.printf(">>> Faltam R$%.2f reais.\n", restante);
+				return 0;
+			}
+		}
 	}
+
+	@Override
+	public int pix(double valorCliente, double total, double restante, Scanner input, Random random) {
+		if (restante == 0) {// primeira vez executando o loop do while
+			System.out.printf("\n>>> Valor da Compra: %.2f\n", total);
+			System.out.print("-> Digite quanto recebeu do cliente: ");
+			valorCliente = input.nextDouble();
+			double conta = valorCliente - total;
+			
+			System.out.print("A chave aleatória pix é: ");
+			int codigoPix = random.nextInt();
+			System.out.println(codigoPix);
+			
+			if(conta == 0 ) {
+				System.out.println(">>> Obrigado por comprar conosco!");
+				return 1;
+			} else {
+				restante = total - valorCliente;
+				System.out.printf(">>> Faltam R$%.2f reais.\n", restante);
+				return 0;
+			}
+		} else {
+			System.out.printf("\n>>> Valor que falta: %.2f\n", restante);
+			System.out.print("-> Digite quanto recebeu do cliente: ");
+			valorCliente = input.nextDouble();
+			double conta = valorCliente - restante;
+			
+			System.out.print("A chave aleatória pix é: ");
+			int codigoPix = random.nextInt();
+			System.out.println(codigoPix);
+			
+			if(conta == 0) {
+				System.out.println(">>> Obrigado por comprar conosco!");
+				return 1;
+			} else {
+				restante = total - valorCliente;
+				System.out.printf(">>> Faltam R$%.2f reais.\n", restante);
+				return 0;
+			}	
+		}
+	}
+
+	@Override
+	public int debito(double valorCliente, double total, double restante, Scanner input) {
+		if(restante == 0) {
+			System.out.printf("\n>>> Valor da Compra: %.2f\n", total);
+			System.out.print("-> Digite quanto recebeu do cliente: ");
+			valorCliente = input.nextDouble();
+			double conta = valorCliente - total;
+			
+			if(conta == 0 ) {
+				System.out.println(">>> Obrigado por comprar conosco!");
+				return 1;
+			} else {
+				restante = total - valorCliente;
+				System.out.printf(">>> Faltam R$%.2f reais.\n", restante);
+				return 0;
+			}
+		} else {
+			System.out.printf("\n>>> Valor que falta: %.2f\n", restante);
+			System.out.print("-> Digite quanto recebeu do cliente: ");
+			valorCliente = input.nextDouble();
+			double conta = valorCliente - restante;
+			
+			if(conta == 0) {
+				System.out.println(">>> Obrigado por comprar conosco!");
+				return 1;
+			} else {
+				restante = total - valorCliente;
+				System.out.printf(">>> Faltam R$%.2f reais.\n", restante);
+				return 0;
+			}
+		}
+	}
+
+	@Override
+	public int credito(double valorCliente, double total, double restante, Scanner input) {
+		if(restante == 0) {
+			System.out.printf("\n>>> Valor da Compra: %.2f\n", total);
+			System.out.print("-> Digite quanto recebeu do cliente: ");
+			valorCliente = input.nextDouble();
+			double conta = valorCliente - total;
+			
+			if(conta == 0 ) {
+				System.out.println(">>> Obrigado por comprar conosco!");
+				return 1;
+			} else {
+				restante = total - valorCliente;
+				System.out.printf(">>> Faltam R$%.2f reais.\n", restante);
+				return 0;
+			}
+		} else {
+			System.out.printf("\n>>> Valor que falta: %.2f\n", restante);
+			System.out.print("-> Digite quanto recebeu do cliente: ");
+			valorCliente = input.nextDouble();
+			double conta = valorCliente - restante;
+			
+			if(conta == 0) {
+				System.out.println(">>> Obrigado por comprar conosco!");
+				return 1;
+			} else {
+				restante = total - valorCliente;
+				System.out.printf(">>> Faltam R$%.2f reais.\n", restante);
+				return 0;
+			}
+		}
+	}
+
 	
 }
