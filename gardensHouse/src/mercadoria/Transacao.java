@@ -9,19 +9,17 @@ public class Transacao {
 	private String cpfCliente;
     private String idFuncionario;
     private String idVenda;
-    private String metodo;
     private LocalDate dataDaCompra;
     private List<Item> carrinho;
     private double total;
 
     
-    public Transacao(String cpfCliente, String idFuncionario, LocalDate dataDaCompra, List<Item> carrinho, double total, String metodo) {
+    public Transacao(String cpfCliente, String idFuncionario, LocalDate dataDaCompra, List<Item> carrinho, double total) {
         this.cpfCliente = cpfCliente;
         this.idFuncionario = idFuncionario;
         this.dataDaCompra = dataDaCompra;
         this.carrinho = carrinho;
         this.total = total;
-        this.metodo = metodo;
     }
     
     // getters e setters
@@ -73,15 +71,5 @@ public class Transacao {
 	public void setTotal(double total) {
 		this.total = total;
 	}
-
-	public String getMetodo() {
-		return metodo;
-	}
-
-	public void setMetodo(String metodo) {
-		this.metodo = metodo;
-	}
-
-
 	
 }

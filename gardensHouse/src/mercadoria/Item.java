@@ -302,19 +302,10 @@ public class Item{
 						
 						
 						Pagamento tipoDePagamento = new Pagamento();
-						String tipoPagamento = null;
+						tipoDePagamento.metodoPagamento(total, input);
+
 						
-						if(tipoDePagamento.metodoPagamento(total, input)==1) {
-							tipoPagamento = "Dinheiro";
-						} else if(tipoDePagamento.metodoPagamento(total, input)==2) {
-							tipoPagamento = "Pix";
-						} else if(tipoDePagamento.metodoPagamento(total, input)==3) {
-							tipoPagamento = "Cartão de Débito";
-						} else if(tipoDePagamento.metodoPagamento(total, input)==4) {
-							tipoPagamento = "Cartão de Crédito";
-						} 
-						
-						loja.realizarVendas(new Transacao(cpf, idFuncionario, LocalDate.now(), carrinhoClone, total, tipoPagamento));
+						loja.realizarVendas(new Transacao(cpf, idFuncionario, LocalDate.now(), carrinhoClone, total));
 
 						carrinho.clear();
 					}

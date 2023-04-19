@@ -5,11 +5,12 @@ import java.util.Scanner;
 
 public interface iPagamento {
 
-	int dinheiro(double valorCliente, double total, double troco, double restante, Scanner input);
 
-	int pix(double valorCliente, double total, double restante, Scanner input, Random random);
+	void dinheiro(double valorCliente, double total, double troco, Scanner input);
 
-	int debito(double valorCliente, double total, double restante, Scanner input);
+	void pix(double valorCliente, double total, Scanner input, Random random);
 
-	int credito(double valorCliente, double total, double restante, Scanner input);
+	void debito(double valorCliente, double total, Scanner input);
+
+	void credito(double valorCliente, double total, Scanner input);
 }
